@@ -1,234 +1,534 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
-  
-  <title>Rifa Online</title>
- 
-</head>
+<html><head><base href="." />
+    <title>Sistema de Rifa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f0f0f0;
+            box-sizing: border-box;
+            background-image: url("assets/WhatsApp\ Image\ 2024-12-14\ at\ 18.21.30.jpeg");
 
-<body>
-
-  <div class="fundo"><img src="https://img.freepik.com/vetores-premium/folha-da-sorte-irlandesa-de-trevo_317331-159.jpg?w=740" alt=""></div>
-
-
-  <div class="container">
-    <img class="logo" src="/logosallano.svg" alt="nao carregou">
-    <h1>🍀🍀SV PREMIAÇÕES🍀🍀</h1>
-    <div class="numbers-grid" id="numbersGrid">
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-0"><label class="number-label"
-          for="number-0">00</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-1"><label class="number-label"
-          for="number-1">01</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-2"><label class="number-label"
-          for="number-2">02</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-3"><label class="number-label"
-          for="number-3">03</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-4"><label class="number-label"
-          for="number-4">04</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-5"><label class="number-label"
-          for="number-5">05</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-6"><label class="number-label"
-          for="number-6">06</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-7"><label class="number-label"
-          for="number-7">07</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-8"><label class="number-label"
-          for="number-8">08</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-9"><label class="number-label"
-          for="number-9">09</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-10"><label class="number-label"
-          for="number-10">10</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-11"><label class="number-label"
-          for="number-11">11</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-12"><label class="number-label"
-          for="number-12">12</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-13"><label class="number-label"
-          for="number-13">13</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-14"><label class="number-label"
-          for="number-14">14</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-15"><label class="number-label"
-          for="number-15">15</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-16"><label class="number-label"
-          for="number-16">16</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-17"><label class="number-label"
-          for="number-17">17</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-18"><label class="number-label"
-          for="number-18">18</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-19"><label class="number-label"
-          for="number-19">19</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-20"><label class="number-label"
-          for="number-20">20</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-21"><label class="number-label"
-          for="number-21">21</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-22"><label class="number-label"
-          for="number-22">22</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-23"><label class="number-label"
-          for="number-23">23</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-24"><label class="number-label"
-          for="number-24">24</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-25"><label class="number-label"
-          for="number-25">25</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-26"><label class="number-label"
-          for="number-26">26</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-27"><label class="number-label"
-          for="number-27">27</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-28"><label class="number-label"
-          for="number-28">28</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-29"><label class="number-label"
-          for="number-29">29</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-30"><label class="number-label"
-          for="number-30">30</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-31"><label class="number-label"
-          for="number-31">31</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-32"><label class="number-label"
-          for="number-32">32</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-33"><label class="number-label"
-          for="number-33">33</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-34"><label class="number-label"
-          for="number-34">34</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-35"><label class="number-label"
-          for="number-35">35</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-36"><label class="number-label"
-          for="number-36">36</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-37"><label class="number-label"
-          for="number-37">37</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-38"><label class="number-label"
-          for="number-38">38</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-39"><label class="number-label"
-          for="number-39">39</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-40"><label class="number-label"
-          for="number-40">40</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-41"><label class="number-label"
-          for="number-41">41</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-42"><label class="number-label"
-          for="number-42">42</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-43"><label class="number-label"
-          for="number-43">43</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-44"><label class="number-label"
-          for="number-44">44</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-45"><label class="number-label"
-          for="number-45">45</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-46"><label class="number-label"
-          for="number-46">46</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-47"><label class="number-label"
-          for="number-47">47</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-48"><label class="number-label"
-          for="number-48">48</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-49"><label class="number-label"
-          for="number-49">49</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-50"><label class="number-label"
-          for="number-50">50</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-51"><label class="number-label"
-          for="number-51">51</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-52"><label class="number-label"
-          for="number-52">52</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-53"><label class="number-label"
-          for="number-53">53</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-54"><label class="number-label"
-          for="number-54">54</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-55"><label class="number-label"
-          for="number-55">55</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-56"><label class="number-label"
-          for="number-56">56</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-57"><label class="number-label"
-          for="number-57">57</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-58"><label class="number-label"
-          for="number-58">58</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-59"><label class="number-label"
-          for="number-59">59</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-60"><label class="number-label"
-          for="number-60">60</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-61"><label class="number-label"
-          for="number-61">61</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-62"><label class="number-label"
-          for="number-62">62</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-63"><label class="number-label"
-          for="number-63">63</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-64"><label class="number-label"
-          for="number-64">64</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-65"><label class="number-label"
-          for="number-65">65</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-66"><label class="number-label"
-          for="number-66">66</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-67"><label class="number-label"
-          for="number-67">67</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-68"><label class="number-label"
-          for="number-68">68</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-69"><label class="number-label"
-          for="number-69">69</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-70"><label class="number-label"
-          for="number-70">70</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-71"><label class="number-label"
-          for="number-71">71</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-72"><label class="number-label"
-          for="number-72">72</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-73"><label class="number-label"
-          for="number-73">73</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-74"><label class="number-label"
-          for="number-74">74</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-75"><label class="number-label"
-          for="number-75">75</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-76"><label class="number-label"
-          for="number-76">76</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-77"><label class="number-label"
-          for="number-77">77</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-78"><label class="number-label"
-          for="number-78">78</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-79"><label class="number-label"
-          for="number-79">79</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-80"><label class="number-label"
-          for="number-80">80</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-81"><label class="number-label"
-          for="number-81">81</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-82"><label class="number-label"
-          for="number-82">82</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-83"><label class="number-label"
-          for="number-83">83</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-84"><label class="number-label"
-          for="number-84">84</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-85"><label class="number-label"
-          for="number-85">85</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-86"><label class="number-label"
-          for="number-86">86</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-87"><label class="number-label"
-          for="number-87">87</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-88"><label class="number-label"
-          for="number-88">88</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-89"><label class="number-label"
-          for="number-89">89</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-90"><label class="number-label"
-          for="number-90">90</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-91"><label class="number-label"
-          for="number-91">91</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-92"><label class="number-label"
-          for="number-92">92</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-93"><label class="number-label"
-          for="number-93">93</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-94"><label class="number-label"
-          for="number-94">94</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-95"><label class="number-label"
-          for="number-95">95</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-96"><label class="number-label"
-          for="number-96">96</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-97"><label class="number-label"
-          for="number-97">97</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-98"><label class="number-label"
-          for="number-98">98</label></div>
-      <div class="number-item"><input type="checkbox" class="number-checkbox" id="number-99"><label class="number-label"
-          for="number-99">99</label></div>
-    </div>
-
-    <div class="buyer-info" id="buyerInfo" style="display: none;">
-      <h3>Informações do Comprador</h3>
-      <input type="text" id="buyerName" placeholder="Nome completo">
-      <input type="text" id="buyerPhone" placeholder="Telefone">
-      <button onclick="saveNumber()">Confirmar Compra</button>
-    </div>
-  </div>
-
-</body>
-<script src="./script.js"></script>
-
-</html>
+            background-position: center;
+            background-size: cover;
+        }
+    
+        h1 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            text-align: center;
+            margin-bottom: 10px;
+            
+            color: #fff;/* Add this line to reduce space between title and logo */
+        }
+    
+        .logo-container {
+            text-align: center;
+            margin: 20px auto;
+            max-width: 300px;
+        }
+    
+        .logo {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+           border-radius: 10px;/* Since the logo is circular */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+    
+        .numbers-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+    
+        .number-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            background: white;
+            position: relative;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            cursor: pointer;
+        }
+    
+        .number-box.selected {
+            background: #e0ffe0;
+        }
+    
+        .number-box.paid {
+            background: #90EE90;
+        }
+    
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+    
+        .modal-content {
+            background: white;
+            padding: 20px;
+            width: 90%;
+            max-width: 300px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 5px;
+            margin: 0; /* Remove the previous margin */
+        }
+    
+        .modal-content input,
+        .modal-content button {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+    
+        .admin-panel {
+            display: none;
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+    
+        .admin-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 300px;
+            display: block;
+            margin: 10px auto;
+        }
+    
+        .exit-admin-button {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 300px;
+            display: block;
+            margin: 10px auto;
+        }
+    
+        .buyer-info {
+            font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+            margin-top: 5px;
+            word-break: break-word;
+        }
+    
+        #adminList div {
+            background: #f9f9f9;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+    
+        #adminList button {
+            padding: 5px 10px;
+            margin: 2px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+        }
+    
+        .buyer-summary {
+            background: white;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    
+        .buyer-numbers {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+    
+            .numbers-container {
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+                gap: 4px;
+            }
+    
+            .modal-content {
+                width: 95%;
+                padding: 15px;
+            }
+    
+            .admin-button,
+            .exit-admin-button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+    
+            .buyer-summary {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+    
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+    
+            .numbers-container {
+                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            }
+    
+            .number-box {
+                padding: 5px;
+            }
+    
+            #adminList button {
+                width: 100%;
+                margin: 2px 0;
+            }
+    
+            .logo-container {
+                max-width: 150px;
+            }
+        }
+    
+        @media (max-width: 480px) {
+            .numbers-container {
+                grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+                gap: 3px;
+            }
+    
+            .number-box {
+                padding: 4px;
+                font-size: 12px;
+            }
+    
+            .buyer-info {
+                font-size: 10px;
+            }
+    
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 5px;
+            }
+    
+            .logo-container {
+                max-width: 100px;
+                margin: 10px auto;
+            }
+    
+            .modal-content input,
+            .modal-content button {
+                padding: 6px;
+                font-size: 14px;
+            }
+    
+            #adminList div {
+                padding: 8px;
+                font-size: 13px;
+            }
+        }
+    
+        @media (max-width: 320px) {
+            .numbers-container {
+                grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+                gap: 2px;
+            }
+    
+            .number-box {
+                padding: 3px;
+                font-size: 11px;
+            }
+    
+            .buyer-info {
+                font-size: 9px;
+            }
+    
+            .logo-container {
+                max-width: 80px;
+            }
+        }
+    </style>
+    </head>
+    <body>
+        <h1>Escolha seu número faça aquela fezinha e boa sorte🙌😁</h1>
+        <div class="logo-container">
+            <img src="./assets/logosallano.png" alt="SV Premiações Logo" class="logo">
+        </div>
+        
+        <button onclick="showAdminLogin()" class="admin-button">Área Admin</button>
+    
+        <div id="buyerSummary"></div>
+        <div class="numbers-container" id="numbersContainer"></div>
+    
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h2>Comprar Número <span id="selectedNumber"></span></h2>
+                <input type="text" id="buyerName" placeholder="Seu nome">
+                <button onclick="confirmPurchase()">Confirmar</button>
+                <button onclick="closeModal()">Cancelar</button>
+            </div>
+        </div>
+    
+        <div id="adminPanel" class="admin-panel">
+            <h2>Painel Administrativo</h2>
+            <div id="adminControls">
+                <button onclick="selectNumberForBuyer()" class="admin-button">Selecionar Número para Comprador</button>
+                <div id="adminList"></div>
+            </div>
+            <button onclick="exitAdminPanel()" class="exit-admin-button">Sair da Área Administrativa</button>
+        </div>
+    
+    <script>
+    const ADMIN_PASSWORD = "Sallano22";
+    let numbers = {};
+    let isAdminMode = false;
+    
+    function initializeNumbers() {
+        const container = document.getElementById('numbersContainer');
+        for (let i = 0; i <= 99; i++) {
+            const number = i.toString().padStart(2, '0');
+            const div = document.createElement('div');
+            div.className = 'number-box';
+            div.onclick = () => handleNumberClick(number);
+            div.innerHTML = `
+                <div>${number}</div>
+                <div class="buyer-info" id="info-${number}"></div>
+                <input type="checkbox" id="checkbox-${number}">
+            `;
+            container.appendChild(div);
+            numbers[number] = {
+                selected: false,
+                buyer: '',
+                paid: false
+            };
+        }
+    }
+    
+    function handleNumberClick(number) {
+        if (!numbers[number].selected) {
+            document.getElementById('selectedNumber').textContent = number;
+            document.getElementById('modal').style.display = 'block';
+        }
+    }
+    
+    function selectNumberForBuyer() {
+        const number = prompt("Digite o número que deseja selecionar (00-99):");
+        if (number && /^\d{1,2}$/.test(number)) {
+            const paddedNumber = number.padStart(2, '0');
+            if (!numbers[paddedNumber].selected) {
+                const name = prompt("Digite o nome do comprador:");
+                if (name && name.trim()) {
+                    numbers[paddedNumber] = {
+                        selected: true,
+                        buyer: name.trim(),
+                        paid: false
+                    };
+                    updateNumberDisplay(paddedNumber);
+                    updateBuyerSummary();
+                    updateAdminList();
+                }
+            } else {
+                alert("Este número já está selecionado!");
+            }
+        } else {
+            alert("Por favor, digite um número válido entre 00 e 99.");
+        }
+    }
+    
+    function exitAdminPanel() {
+        document.getElementById('adminPanel').style.display = 'none';
+        isAdminMode = false;
+    }
+    
+    function updateBuyerSummary() {
+        const buyerSummary = document.getElementById('buyerSummary');
+        const buyers = {};
+        
+        Object.entries(numbers).forEach(([number, data]) => {
+            if (data.selected && data.buyer) {
+                if (!buyers[data.buyer]) {
+                    buyers[data.buyer] = [];
+                }
+                buyers[data.buyer].push(number);
+            }
+        });
+    
+        let summaryHTML = '';
+        Object.entries(buyers).forEach(([buyer, nums]) => {
+            if (nums.length > 1) {
+                summaryHTML += `
+                    <div class="buyer-summary">
+                        <strong>${buyer}</strong>: Números ${nums.join(', ')}
+                    </div>
+                `;
+            }
+        });
+    
+        buyerSummary.innerHTML = summaryHTML;
+    }
+    
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+        document.getElementById('buyerName').value = '';
+        const number = document.getElementById('selectedNumber').textContent;
+        document.getElementById(`checkbox-${number}`).checked = false;
+    }
+    
+    function confirmPurchase() {
+        const number = document.getElementById('selectedNumber').textContent;
+        const name = document.getElementById('buyerName').value.trim();
+        
+        if (name) {
+            numbers[number] = {
+                selected: true,
+                buyer: name,
+                paid: false
+            };
+            updateNumberDisplay(number);
+            updateBuyerSummary();
+            closeModal();
+        } else {
+            alert('Por favor, insira um nome.');
+        }
+    }
+    
+    function updateNumberDisplay(number) {
+        const info = document.getElementById(`info-${number}`);
+        const box = info.parentElement;
+        const checkbox = document.getElementById(`checkbox-${number}`);
+        
+        if (numbers[number].selected) {
+            info.textContent = `${numbers[number].buyer} ${numbers[number].paid ? '(Pago)' : '(Pendente)'}`;
+            box.className = `number-box selected ${numbers[number].paid ? 'paid' : ''}`;
+            checkbox.checked = true;
+        } else {
+            info.textContent = '';
+            box.className = 'number-box';
+            checkbox.checked = false;
+        }
+    }
+    
+    function showAdminLogin() {
+        const password = prompt("Digite a senha de administrador:");
+        if (password === ADMIN_PASSWORD) {
+            showAdminPanel();
+        } else {
+            alert("Senha incorreta!");
+        }
+    }
+    
+    function showAdminPanel() {
+        const adminPanel = document.getElementById('adminPanel');
+        adminPanel.style.display = 'block';
+        isAdminMode = true;
+        updateAdminList();
+    }
+    
+    function updateAdminList() {
+        const adminList = document.getElementById('adminList');
+        adminList.innerHTML = '';
+        
+        const buyerGroups = {};
+        Object.entries(numbers).forEach(([number, data]) => {
+            if (data.selected) {
+                if (!buyerGroups[data.buyer]) {
+                    buyerGroups[data.buyer] = [];
+                }
+                buyerGroups[data.buyer].push(number);
+            }
+        });
+        
+        Object.entries(buyerGroups).forEach(([buyer, buyerNumbers]) => {
+            const div = document.createElement('div');
+            const paidStatus = numbers[buyerNumbers[0]].paid ? '(Pago)' : '(Pendente)';
+            div.innerHTML = `
+                <p><strong>${buyer}</strong> ${paidStatus}</p>
+                <p>Números: ${buyerNumbers.join(', ')}</p>
+                <button onclick="togglePaid('${buyerNumbers[0]}')">
+                    ${numbers[buyerNumbers[0]].paid ? 'Marcar como Não Pago' : 'Marcar como Pago'}
+                </button>
+                <button onclick="editBuyer('${buyerNumbers[0]}')">Editar</button>
+                <button onclick="deleteBuyer('${buyerNumbers[0]}')">Excluir</button>
+            `;
+            adminList.appendChild(div);
+        });
+    }
+    
+    function togglePaid(number) {
+        const buyer = numbers[number].buyer;
+        const paid = !numbers[number].paid;
+        
+        Object.entries(numbers).forEach(([num, data]) => {
+            if (data.selected && data.buyer === buyer) {
+                numbers[num].paid = paid;
+                updateNumberDisplay(num);
+            }
+        });
+        
+        updateAdminList();
+    }
+    
+    function editBuyer(number) {
+        const oldBuyer = numbers[number].buyer;
+        const newName = prompt("Digite o novo nome:", oldBuyer);
+        if (newName && newName.trim()) {
+            Object.entries(numbers).forEach(([num, data]) => {
+                if (data.selected && data.buyer === oldBuyer) {
+                    numbers[num].buyer = newName.trim();
+                    updateNumberDisplay(num);
+                }
+            });
+            updateAdminList();
+            updateBuyerSummary();
+        }
+    }
+    
+    function deleteBuyer(number) {
+        const buyer = numbers[number].buyer;
+        if (confirm("Tem certeza que deseja excluir esta compra?")) {
+            Object.entries(numbers).forEach(([num, data]) => {
+                if (data.selected && data.buyer === buyer) {
+                    numbers[num] = {
+                        selected: false,
+                        buyer: '',
+                        paid: false
+                    };
+                    updateNumberDisplay(num);
+                }
+            });
+            updateAdminList();
+            updateBuyerSummary();
+        }
+    }
+    
+    // Inicializar a rifa
+    initializeNumbers();
+    </script>
+    
+    </body></html>
