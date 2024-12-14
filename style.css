@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  body {
+    width: 100vw;
+    height: 100vh;
+    height: auto;
+    background-size: cover;
+   
+  
+    
+  }
+  .fundo{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: cover;
+
+
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: no-repeat;
+      background-size: cover;
+    }
+  }
+
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 95%;
+    margin-top: 100px;
+  }
+
+  .logo{
+    position: absolute;
+  
+  }
+
+  h1 {
+    text-align: center;
+    color: #1a73e8;
+    margin-bottom: 20px;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+    margin: 20px 0;
+  }
+
+  .number-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    position: relative;
+
+    height: 75px;
+  }
+
+  .number-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  .number-label {
+    font-size: 22px;
+  }
+
+  .buyer-name-display {
+    font-size: 20px;
+    color: #2fa45a;
+    position: absolute;
+    right: px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    top: 2px;
+    ;
+
+  }
+
+  .selected {
+    background: #e3f2fd;
+    border-color: #1a73e8;
+  }
+
+  .paid {
+    background: #e8f5e9;
+    border-color: #44bc48a1;
+  }
+
+  .buyer-info {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+  }
+
+  .buyer-info h3 {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: clamp(14px, 2vw, 16px);
+  }
+
+  button {
+    background: #1a73e8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: clamp(14px, 2vw, 16px);
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  button:hover {
+    background: #1557b0;
+  }
+
+  .actions {
+    display: flex;
+    gap: 5px;
+    margin-left: auto;
+  }
+
+  .delete-btn,
+  .payment-toggle {
+    padding: 2px 4px;
+    font-size: 11px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .delete-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+  }
+
+  .payment-toggle {
+    background: none;
+    border: 1px solid #1a73e8;
+    color: #1a73e8;
+
+  }
+
+  @media (max-width: 480px) {
+    .number-item {
+      flex-wrap: wrap;
+    }
+
+    .actions {
+      width: 100%;
+      margin-top: 5px;
+    }
+  }
