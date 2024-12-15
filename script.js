@@ -3,19 +3,37 @@ const ADMIN_PASSWORD = "Sallano22";
 let numbers = {};
 let isAdminMode = false;
 
-function saveToLocalStorage() {
-    localStorage.setItem('rifaNumbers', JSON.stringify(numbers));
+async function saveToDatabase(number, data) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/numbers/${number}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+        if (!response.ok) throw new Error('Failed to save to database');
+    } catch (error) {
+        console.error('Error saving to database:', error);
+    }
 }
 
-function loadFromLocalStorage() {
-    const savedNumbers = localStorage.getItem('rifaNumbers');
-    if (savedNumbers) {
-        numbers = JSON.parse(savedNumbers);
-        // Update all number displays
-        Object.keys(numbers).forEach(number => {
-            updateNumberDisplay(number);
+async function loadFromDatabase() {
+    try {
+        const response = await fetch('http://localhost:3000/api/numbers');
+        if (!response.ok) throw new Error('Failed to load from database');
+        const data = await response.json();
+        data.forEach(item => {
+            numbers[item.number] = {
+                selected: item.selected,
+                buyer: item.buyer,
+                paid: item.paid
+            };
+            updateNumberDisplay(item.number);
         });
         updateBuyerSummary();
+    } catch (error) {
+        console.error('Error loading from database:', error);
     }
 }
 
@@ -40,7 +58,7 @@ function initializeNumbers() {
             };
         }
     }
-    loadFromLocalStorage(); // Load saved data after initializing
+    loadFromDatabase(); // Load saved data after initializing
 }
 
 function handleNumberClick(number) {
@@ -65,7 +83,7 @@ function selectNumberForBuyer() {
                 updateNumberDisplay(paddedNumber);
                 updateBuyerSummary();
                 updateAdminList();
-                saveToLocalStorage(); // Save after admin selection
+                saveToDatabase(paddedNumber, numbers[paddedNumber]); // Save after admin selection
             }
         } else {
             alert("Este número já está selecionado!");
@@ -114,7 +132,7 @@ function closeModal() {
     document.getElementById(`checkbox-${number}`).checked = false;
 }
 
-function confirmPurchase() {
+async function confirmPurchase() {
     const number = document.getElementById('selectedNumber').textContent;
     const name = document.getElementById('buyerName').value.trim();
     
@@ -124,9 +142,9 @@ function confirmPurchase() {
             buyer: name,
             paid: false
         };
+        await saveToDatabase(number, numbers[number]);
         updateNumberDisplay(number);
         updateBuyerSummary();
-        saveToLocalStorage(); // Save after purchase
         closeModal();
     } else {
         alert('Por favor, insira um nome.');
@@ -207,7 +225,7 @@ function togglePaid(number) {
     });
     
     updateAdminList();
-    saveToLocalStorage(); // Save after toggling paid status
+    saveToDatabase(number, numbers[number]); // Save after toggling paid status
 }
 
 function editBuyer(number) {
@@ -222,11 +240,11 @@ function editBuyer(number) {
         });
         updateAdminList();
         updateBuyerSummary();
-        saveToLocalStorage(); // Save after editing
+        saveToDatabase(number, numbers[number]); // Save after editing
     }
 }
 
-function deleteBuyer(number) {
+async function deleteBuyer(number) {
     const buyer = numbers[number].buyer;
     if (confirm("Tem certeza que deseja excluir esta compra?")) {
         Object.entries(numbers).forEach(([num, data]) => {
@@ -241,36 +259,41 @@ function deleteBuyer(number) {
         });
         updateAdminList();
         updateBuyerSummary();
-        saveToLocalStorage(); // Save after deleting
+        await saveToDatabase(number, numbers[number]); // Save after deleting
     }
 }
 
-function clearAllRaffleData() {
+async function clearAllRaffleData() {
     if (confirm("ATENÇÃO! Isso irá apagar todos os dados da rifa. Esta ação não pode ser desfeita. Deseja continuar?")) {
-        // Clear all numbers
-        for (let i = 0; i <= 99; i++) {
-            const number = i.toString().padStart(2, '0');
-            numbers[number] = {
-                selected: false,
-                buyer: '',
-                paid: false
-            };
-            updateNumberDisplay(number);
+        try {
+            const response = await fetch('http://localhost:3000/api/numbers/clear', {
+                method: 'DELETE'
+            });
+            if (!response.ok) throw new Error('Failed to clear database');
+            
+            for (let i = 0; i <= 99; i++) {
+                const number = i.toString().padStart(2, '0');
+                numbers[number] = {
+                    selected: false,
+                    buyer: '',
+                    paid: false
+                };
+                updateNumberDisplay(number);
+            }
+            
+            updateAdminList();
+            updateBuyerSummary();
+            
+            alert("Rifa limpa com sucesso!");
+        } catch (error) {
+            console.error('Error clearing database:', error);
+            alert("Erro ao limpar a rifa. Tente novamente.");
         }
-        
-        // Update UI
-        updateAdminList();
-        updateBuyerSummary();
-        
-        // Clear localStorage
-        localStorage.removeItem('rifaNumbers');
-        
-        alert("Rifa limpa com sucesso!");
     }
 }
 
 // Load saved data when the page loads
-window.addEventListener('load', loadFromLocalStorage);
+window.addEventListener('load', loadFromDatabase);
 
 // Inicializar a rifa
 initializeNumbers();
