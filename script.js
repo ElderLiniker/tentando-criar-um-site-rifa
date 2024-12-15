@@ -245,6 +245,30 @@ function deleteBuyer(number) {
     }
 }
 
+function clearAllRaffleData() {
+    if (confirm("ATENÇÃO! Isso irá apagar todos os dados da rifa. Esta ação não pode ser desfeita. Deseja continuar?")) {
+        // Clear all numbers
+        for (let i = 0; i <= 99; i++) {
+            const number = i.toString().padStart(2, '0');
+            numbers[number] = {
+                selected: false,
+                buyer: '',
+                paid: false
+            };
+            updateNumberDisplay(number);
+        }
+        
+        // Update UI
+        updateAdminList();
+        updateBuyerSummary();
+        
+        // Clear localStorage
+        localStorage.removeItem('rifaNumbers');
+        
+        alert("Rifa limpa com sucesso!");
+    }
+}
+
 // Load saved data when the page loads
 window.addEventListener('load', loadFromLocalStorage);
 
