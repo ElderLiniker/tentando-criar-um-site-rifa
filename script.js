@@ -1,6 +1,23 @@
+
 const ADMIN_PASSWORD = "Sallano22";
 let numbers = {};
 let isAdminMode = false;
+
+function saveToLocalStorage() {
+    localStorage.setItem('rifaNumbers', JSON.stringify(numbers));
+}
+
+function loadFromLocalStorage() {
+    const savedNumbers = localStorage.getItem('rifaNumbers');
+    if (savedNumbers) {
+        numbers = JSON.parse(savedNumbers);
+        // Update all number displays
+        Object.keys(numbers).forEach(number => {
+            updateNumberDisplay(number);
+        });
+        updateBuyerSummary();
+    }
+}
 
 function initializeNumbers() {
     const container = document.getElementById('numbersContainer');
@@ -15,12 +32,15 @@ function initializeNumbers() {
             <input type="checkbox" id="checkbox-${number}">
         `;
         container.appendChild(div);
-        numbers[number] = {
-            selected: false,
-            buyer: '',
-            paid: false
-        };
+        if (!numbers[number]) {
+            numbers[number] = {
+                selected: false,
+                buyer: '',
+                paid: false
+            };
+        }
     }
+    loadFromLocalStorage(); // Load saved data after initializing
 }
 
 function handleNumberClick(number) {
@@ -45,6 +65,7 @@ function selectNumberForBuyer() {
                 updateNumberDisplay(paddedNumber);
                 updateBuyerSummary();
                 updateAdminList();
+                saveToLocalStorage(); // Save after admin selection
             }
         } else {
             alert("Este número já está selecionado!");
@@ -105,6 +126,7 @@ function confirmPurchase() {
         };
         updateNumberDisplay(number);
         updateBuyerSummary();
+        saveToLocalStorage(); // Save after purchase
         closeModal();
     } else {
         alert('Por favor, insira um nome.');
@@ -185,6 +207,7 @@ function togglePaid(number) {
     });
     
     updateAdminList();
+    saveToLocalStorage(); // Save after toggling paid status
 }
 
 function editBuyer(number) {
@@ -199,6 +222,7 @@ function editBuyer(number) {
         });
         updateAdminList();
         updateBuyerSummary();
+        saveToLocalStorage(); // Save after editing
     }
 }
 
@@ -217,8 +241,12 @@ function deleteBuyer(number) {
         });
         updateAdminList();
         updateBuyerSummary();
+        saveToLocalStorage(); // Save after deleting
     }
 }
+
+// Load saved data when the page loads
+window.addEventListener('load', loadFromLocalStorage);
 
 // Inicializar a rifa
 initializeNumbers();
