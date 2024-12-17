@@ -1,5 +1,5 @@
 
-const ADMIN_PASSWORD = "Sallano22";
+
 let numbers = {};
 let isAdminMode = false;
 
@@ -166,15 +166,29 @@ function updateNumberDisplay(number) {
         checkbox.checked = false;
     }
 }
-
-function showAdminLogin() {
+async function showAdminLogin() {
     const password = prompt("Digite a senha de administrador:");
-    if (password === ADMIN_PASSWORD) {
-        showAdminPanel();
-    } else {
-        alert("Senha incorreta!");
+
+    try {
+        const response = await fetch('http://localhost:3000/api/admin/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ password })
+        });
+
+        if (response.ok) {
+            showAdminPanel(); // Mostra o painel de administração se a autenticação for bem-sucedida
+        } else {
+            alert("Senha incorreta!");
+        }
+    } catch (error) {
+        console.error("Erro na autenticação:", error);
+        alert("Erro ao autenticar. Tente novamente.");
     }
 }
+
 
 function showAdminPanel() {
     const adminPanel = document.getElementById('adminPanel');
@@ -213,22 +227,29 @@ function updateAdminList() {
     });
 }
 
-function togglePaid(number) {
+async function togglePaid(number) {
     const buyer = numbers[number].buyer;
     const paid = !numbers[number].paid;
-    
+
+    // Atualiza o status de pagamento de todos os números associados ao comprador
     Object.entries(numbers).forEach(([num, data]) => {
         if (data.selected && data.buyer === buyer) {
             numbers[num].paid = paid;
             updateNumberDisplay(num);
         }
     });
-    
+
     updateAdminList();
-    saveToDatabase(number, numbers[number]); // Save after toggling paid status
+    
+    try {
+        await saveToDatabase(number, numbers[number]); // Salva os dados no backend
+    } catch (error) {
+        console.error('Erro ao salvar alteração de pagamento:', error);
+    }
 }
 
-function editBuyer(number) {
+
+async function editBuyer(number) {
     const oldBuyer = numbers[number].buyer;
     const newName = prompt("Digite o novo nome:", oldBuyer);
     if (newName && newName.trim()) {
@@ -240,9 +261,14 @@ function editBuyer(number) {
         });
         updateAdminList();
         updateBuyerSummary();
-        saveToDatabase(number, numbers[number]); // Save after editing
+        try {
+            await saveToDatabase(number, numbers[number]); // Salva os dados no backend
+        } catch (error) {
+            console.error('Erro ao editar comprador:', error);
+        }
     }
 }
+
 
 async function deleteBuyer(number) {
     const buyer = numbers[number].buyer;
@@ -259,9 +285,15 @@ async function deleteBuyer(number) {
         });
         updateAdminList();
         updateBuyerSummary();
-        await saveToDatabase(number, numbers[number]); // Save after deleting
+
+        try {
+            await saveToDatabase(number, numbers[number]); // Salva a exclusão no backend
+        } catch (error) {
+            console.error('Erro ao excluir comprador:', error);
+        }
     }
 }
+
 
 async function clearAllRaffleData() {
     if (confirm("ATENÇÃO! Isso irá apagar todos os dados da rifa. Esta ação não pode ser desfeita. Deseja continuar?")) {
@@ -271,6 +303,7 @@ async function clearAllRaffleData() {
             });
             if (!response.ok) throw new Error('Failed to clear database');
             
+            // Atualiza a interface após limpar a base de dados
             for (let i = 0; i <= 99; i++) {
                 const number = i.toString().padStart(2, '0');
                 numbers[number] = {
@@ -286,11 +319,12 @@ async function clearAllRaffleData() {
             
             alert("Rifa limpa com sucesso!");
         } catch (error) {
-            console.error('Error clearing database:', error);
+            console.error('Erro ao limpar dados da rifa:', error);
             alert("Erro ao limpar a rifa. Tente novamente.");
         }
     }
 }
+
 
 // Load saved data when the page loads
 window.addEventListener('load', loadFromDatabase);
