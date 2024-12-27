@@ -1,43 +1,362 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="./style.css">
-    <title>Document</title>
+    <title>Rifa Online</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        .number-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+        }
+        .number {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+        }
+        .number.selected {
+            background: #FFEB3B; /* Amarelo */
+            color: #000;
+            border-color: #FBC02D;
+        }
+        .number.selected .name {
+            color: #FF5722; /* Cor do nome */
+            font-weight: bold;
+        }
+        .number.paid {
+            background: #4CAF50; /* Verde para pago */
+            color: white;
+            border-color: #388E3C;
+        }
+        .number.not-paid {
+            background: #FFEB3B; /* Amarelo para não pago */
+            color: #000;
+            border-color: #FBC02D;
+        }
+        .form-container {
+            margin-top: 20px;
+        }
+        .form-container input {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .form-container button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .form-container button:hover {
+            background: #45a049;
+        }
+        .admin-button {
+            margin-top: 20px;
+            padding: 10px;
+            background: #FF9800;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+        }
+        .admin-button:hover {
+            background: #FB8C00;
+        }
+        .admin-container {
+            margin-top: 20px;
+        }
+        .admin-container .user-entry {
+            margin-bottom: 10px;
+        }
+        .user-actions {
+            margin-top: 10px;
+        }
+        .admin-container button {
+            margin: 5px;
+            padding: 10px;
+            background: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .admin-container button:hover {
+            background: #d32f2f;
+        }
+        .logout {
+            background: #2196F3;
+        }
+        .logout:hover {
+            background: #1976D2;
+        }
+        .admin-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        @media (max-width: 600px) {
+            .number-grid {
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            }
+            .number {
+                font-size: 14px;
+                padding: 8px;
+            }
+            .form-container input,
+            .form-container button,
+            .admin-button,
+            .admin-container input {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Escolha seu número faça aquela fezinha e boa sorte🙌😁</h1>
-    <div class="logo-container">
-        <img src="./assets/logosallano.png" alt="SV Premiações Logo" class="logo">
-    </div>
-    
-    <button onclick="showAdminLogin()" class="admin-button">Área Admin</button>
-
-    <div id="buyerSummary"></div>
-    <div class="numbers-container" id="numbersContainer"></div>
-
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <h2>Comprar Número <span id="selectedNumber"></span></h2>
-            <input type="text" id="buyerName" placeholder="Seu nome">
-            <button onclick="confirmPurchase()">Confirmar</button>
-            <button onclick="closeModal()">Cancelar</button>
+    <header>
+        <h1>Rifa Online</h1>
+    </header>
+    <main>
+        <div class="number-grid" id="number-grid">
+            <!-- Os números serão carregados dinamicamente aqui -->
         </div>
-    </div>
-
-    <div id="adminPanel" class="admin-panel">
-        <h2>Painel Administrativo</h2>
-        <div id="adminControls">
-            <button onclick="selectNumberForBuyer()" class="admin-button">Selecionar Número para Comprador</button>
-            <div id="adminList"></div>
+        <div class="form-container">
+            <input type="text" id="name" placeholder="Digite seu nome">
+            <button id="confirm-selection">Confirmar Seleção</button>
         </div>
+        <button class="admin-button" id="enter-admin">Entrar na Área Administrativa</button>
+        <div class="admin-container" id="admin-area" style="display: none;">
+            <h2>Área Administrativa</h2>
+            <div id="admin-user-list">
+                <!-- A lista de usuários será carregada dinamicamente aqui -->
+            </div>
+            <label for="admin-password">Senha de Admin:</label>
+            <input type="password" id="admin-password" placeholder="Digite a senha de admin">
+            <button id="login-admin">Entrar</button>
+            <button id="delete-all">Excluir Rifa</button>
+            <button id="logout" class="logout">Sair da Administração</button>
+        </div>
+    </main>
+    <script>
+        const gridContainer = document.getElementById('number-grid');
+        const adminArea = document.getElementById('admin-area');
+        const adminButton = document.getElementById('enter-admin');
+        const adminUserList = document.getElementById('admin-user-list');
+        const confirmButton = document.getElementById('confirm-selection');
+        const nameInput = document.getElementById('name');
+        const adminPasswordInput = document.getElementById('admin-password');
+        const loginAdminButton = document.getElementById('login-admin');
+        let data = JSON.parse(localStorage.getItem('rifaData')) || {};
+        let selectedNumbers = []; // Lista de números selecionados
+        let isAdmin = false;
+        const ADMIN_PASSWORD = 'Sallano22';
 
-        <button onclick="clearAllRaffleData()" class="exit-admin-button clear-raffle">Limpar Toda a Rifa</button>
-        <button onclick="exitAdminPanel()" class="exit-admin-button">Sair da Área Administrativa</button>
-    </div>
+        // Função para carregar os números
+        function loadNumbers() {
+            gridContainer.innerHTML = ''; // Limpar grid
+            for (let i = 0; i < 100; i++) {
+                const numberElement = document.createElement('div');
+                numberElement.classList.add('number');
+                if (data[i]?.paid) {
+                    numberElement.classList.add('paid');
+                } else if (data[i]?.notPaid) {
+                    numberElement.classList.add('not-paid');
+                }
+                numberElement.dataset.number = i;
+                numberElement.innerHTML = `<strong>${i.toString().padStart(2, '0')}</strong>`;
+                // Exibir nome ao lado do número se houver
+                if (data[i]?.name) {
+                    numberElement.innerHTML += `<div class="name">${data[i].name}</div>`;
+                }
+                numberElement.addEventListener('click', () => selectNumber(i));
+                gridContainer.appendChild(numberElement);
+            }
+        }
+
+        // Função para selecionar múltiplos números
+        function selectNumber(number) {
+            const numberElement = document.querySelector(`.number[data-number="${number}"]`);
+            const name = nameInput.value.trim();
+
+            if (selectedNumbers.includes(number)) {
+                // Se já estiver selecionado, desmarque
+                selectedNumbers = selectedNumbers.filter(n => n !== number);
+                numberElement.classList.remove('selected');
+                numberElement.querySelector('.name').remove();
+            } else if (name) {
+                // Se não estiver selecionado, marque
+                selectedNumbers.push(number);
+                numberElement.classList.add('selected');
+                const nameElement = document.createElement('div');
+                nameElement.classList.add('name');
+                nameElement.textContent = name;
+                numberElement.appendChild(nameElement);
+            } else {
+                alert('Digite seu nome antes de selecionar um número.');
+            }
+        }
+
+        // Função para confirmar a seleção
+        confirmButton.addEventListener('click', () => {
+            const name = nameInput.value.trim();
+            if (name && selectedNumbers.length > 0) {
+                // Armazenar os números selecionados junto com o nome
+                selectedNumbers.forEach(number => {
+                    data[number] = { name, paid: false, notPaid: true };
+                });
+                localStorage.setItem('rifaData', JSON.stringify(data));
+                alert(`Você selecionou os números: ${selectedNumbers.join(', ')} para o nome: ${name}`);
+                selectedNumbers = []; // Limpar seleção após confirmação
+                loadNumbers(); // Recarregar os números
+            } else {
+                alert('Selecione ao menos um número e digite seu nome.');
+            }
+        });
+
+        // Função para carregar a lista de usuários na área administrativa
+        function loadAdminList() {
+            adminUserList.innerHTML = '';
+            const users = {};
+            for (let i in data) {
+                const userName = data[i].name;
+                if (!users[userName]) {
+                    users[userName] = [];
+                }
+                users[userName].push(i.toString().padStart(2, '0'));
+            }
+            for (let user in users) {
+                const userEntry = document.createElement('div');
+                userEntry.classList.add('user-entry');
+                userEntry.innerHTML = `<strong>${user}</strong>: ${users[user].join(', ')}
+                <div class="user-actions">
+                    <button onclick="markPaid('${user}')">Marcar como Pago</button>
+                    <button onclick="markNotPaid('${user}')">Marcar como Não Pago</button>
+                    <button onclick="deleteUser('${user}')">Excluir</button>
+                </div>`;
+                adminUserList.appendChild(userEntry);
+            }
+        }
+
+        // Função para marcar um usuário como pago
+        function markPaid(userName) {
+            for (let i in data) {
+                if (data[i].name === userName) {
+                    data[i].paid = true;
+                    data[i].notPaid = false; // Garantir que o 'não pago' seja desmarcado
+                }
+            }
+            localStorage.setItem('rifaData', JSON.stringify(data));
+            loadNumbers();
+            loadAdminList();
+            alert(`Usuário ${userName} marcado como pago.`);
+        }
+
+        // Função para marcar um usuário como não pago
+        function markNotPaid(userName) {
+            for (let i in data) {
+                if (data[i].name === userName) {
+                    data[i].paid = false;
+                    data[i].notPaid = true;
+                }
+            }
+            localStorage.setItem('rifaData', JSON.stringify(data));
+            loadNumbers();
+            loadAdminList();
+            alert(`Usuário ${userName} marcado como não pago.`);
+        }
+
+        // Função para excluir um usuário
+        function deleteUser(userName) {
+            for (let i in data) {
+                if (data[i].name === userName) {
+                    delete data[i];
+                }
+            }
+            localStorage.setItem('rifaData', JSON.stringify(data));
+            loadNumbers();
+            loadAdminList();
+            alert(`Usuário ${userName} e suas seleções foram excluídos.`);
+        }
+
+        // Função para entrar na área administrativa
+        adminButton.addEventListener('click', () => {
+            const password = prompt('Digite a senha de administrador:');
+            if (password === ADMIN_PASSWORD) {
+                isAdmin = true;
+                adminArea.style.display = 'block';
+                adminButton.style.display = 'none';
+                loadAdminList();
+                alert('Bem-vindo à área administrativa.');
+            } else {
+                alert('Senha incorreta.');
+            }
+        });
+
+        // Função para sair da administração
+        document.getElementById('logout').addEventListener('click', () => {
+            isAdmin = false;
+            adminArea.style.display = 'none';
+            adminButton.style.display = 'block';
+            alert('Você saiu da área administrativa.');
+        });
+
+        // Função para excluir todos os números e dados
+        document.getElementById('delete-all').addEventListener('click', () => {
+            if (confirm('Tem certeza que deseja excluir a rifa completa?')) {
+                data = {};
+                localStorage.setItem('rifaData', JSON.stringify(data));
+                loadNumbers();
+                loadAdminList();
+            }
+        });
+
+        // Entrar na área administrativa com senha oculta
+        loginAdminButton.addEventListener('click', () => {
+            const password = adminPasswordInput.value;
+            if (password === ADMIN_PASSWORD) {
+                isAdmin = true;
+                adminArea.style.display = 'block';
+                adminButton.style.display = 'none';
+                loadAdminList();
+                alert('Bem-vindo à área administrativa.');
+            } else {
+                alert('Senha incorreta.');
+            }
+        });
+
+        // Carregar os números e a área administrativa ao carregar a página
+        window.onload = loadNumbers;
+    </script>
 </body>
-
-<script src="./script.js" ></script>
 </html>
